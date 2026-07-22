@@ -1,3 +1,11 @@
+# Generated visualization files
+outputs/visualizations/*.html
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+
 # Python
 __pycache__/
 *.py[cod]
