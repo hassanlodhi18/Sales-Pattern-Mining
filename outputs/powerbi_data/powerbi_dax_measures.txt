@@ -1,0 +1,65 @@
+
+// Power BI DAX Measures for Sales Data Warehouse
+// Generated automatically
+
+// Total Sales
+Total Sales = SUM(fact_sales_powerbi[Total_Cost])
+
+// Average Transaction Value
+Avg Transaction Value = AVERAGE(fact_sales_powerbi[Total_Cost])
+
+// Total Transactions
+Total Transactions = COUNTROWS(fact_sales_powerbi)
+
+// Total Items Sold
+Total Items Sold = SUM(fact_sales_powerbi[Total_Items])
+
+// Sales Growth (Month over Month)
+Sales Growth MoM = 
+VAR CurrentMonth = CALCULATE([Total Sales], MONTH(fact_sales_powerbi[Date]) = MONTH(TODAY()))
+VAR PreviousMonth = CALCULATE([Total Sales], MONTH(fact_sales_powerbi[Date]) = MONTH(TODAY()) - 1)
+RETURN
+    IF(PreviousMonth <> 0, (CurrentMonth - PreviousMonth) / PreviousMonth, 0)
+
+// Sales Growth (Year over Year)
+Sales Growth YoY = 
+VAR CurrentYear = CALCULATE([Total Sales], YEAR(fact_sales_powerbi[Date]) = YEAR(TODAY()))
+VAR PreviousYear = CALCULATE([Total Sales], YEAR(fact_sales_powerbi[Date]) = YEAR(TODAY()) - 1)
+RETURN
+    IF(PreviousYear <> 0, (CurrentYear - PreviousYear) / PreviousYear, 0)
+
+// Average Items per Transaction
+Avg Items per Transaction = AVERAGE(fact_sales_powerbi[Total_Items])
+
+// Sales by Customer Category
+Sales by Category = 
+CALCULATE(
+    [Total Sales],
+    VALUES(fact_sales_powerbi[Customer_Category])
+)
+
+// Top Products by Sales
+Top Products = 
+TOPN(
+    10,
+    SUMMARIZE(
+        fact_sales_powerbi,
+        fact_sales_powerbi[Product],
+        "Sales", [Total Sales]
+    ),
+    [Sales],
+    DESC
+)
+
+// Weekend vs Weekday Sales
+Weekend Sales = 
+CALCULATE(
+    [Total Sales],
+    fact_sales_powerbi[IsWeekend] = TRUE()
+)
+
+Weekday Sales = 
+CALCULATE(
+    [Total Sales],
+    fact_sales_powerbi[IsWeekend] = FALSE()
+)

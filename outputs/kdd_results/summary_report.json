@@ -1,0 +1,13 @@
+{
+  "total_records": 10000,
+  "date_range": "2020-01-01 01:27:48 to 2024-05-18 18:39:58",
+  "mining_tasks_completed": [
+    "summary_statistics",
+    "category_patterns",
+    "monthly_patterns",
+    "store_patterns",
+    "correlation_matrix",
+    "clustering"
+  ],
+  "insights_count": 5
+}

@@ -1,0 +1,36 @@
+{
+  "high_confidence_rules": 0,
+  "high_lift_rules": 0,
+  "top_antecedents": [
+    [
+      "Bread",
+      2
+    ],
+    [
+      "Chicken",
+      2
+    ],
+    [
+      "Mayonnaise",
+      1
+    ],
+    [
+      "Potatoes",
+      1
+    ],
+    [
+      "Shaving Cream",
+      1
+    ]
+  ],
+  "top_consequents": [
+    [
+      "Shaving Cream",
+      4
+    ],
+    [
+      "Potatoes",
+      3
+    ]
+  ]
+}

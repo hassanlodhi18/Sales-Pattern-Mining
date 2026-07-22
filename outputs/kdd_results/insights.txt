@@ -1,0 +1,8 @@
+KDD PROCESS INTERPRETATION RESULTS
+================================================================================
+
+1. Average transaction value: $52.85
+2. Median transaction value: $52.91
+3. Maximum transaction value: $99.99
+4. Highest spending category: Senior Citizen
+5. Best sales month: 1

@@ -1,0 +1,48 @@
+
+POWER BI CONNECTION GUIDE
+=========================
+
+1. OPEN POWER BI DESKTOP
+   - Launch Power BI Desktop application
+
+2. IMPORT DATA
+   Option A: Import from CSV files
+   - Click "Get Data" > "Text/CSV"
+   - Navigate to the powerbi_data folder
+   - Select fact_sales_powerbi.csv
+   - Click "Load"
+   
+   Option B: Import from Excel
+   - Click "Get Data" > "Excel"
+   - Select powerbi_data.xlsx
+   - Choose sheets to import
+   - Click "Load"
+
+3. ESTABLISH RELATIONSHIPS
+   - Go to "Model" view
+   - Create relationships between tables if needed
+   - Fact table should connect to dimension tables via foreign keys
+
+4. CREATE MEASURES
+   - Go to "Data" view
+   - Right-click on fact_sales_powerbi table
+   - Select "New Measure"
+   - Copy measures from powerbi_dax_measures.txt
+
+5. BUILD VISUALIZATIONS
+   - Use the imported data to create:
+     * Sales trend charts
+     * Category breakdowns
+     * Store performance metrics
+     * Customer segment analysis
+     * Product performance dashboards
+
+6. PUBLISH DASHBOARD
+   - Click "Publish" to upload to Power BI Service
+   - Share with stakeholders
+
+TIPS:
+- Use aggregated tables for better performance
+- Create date hierarchies for time-based analysis
+- Use calculated columns for additional metrics
+- Apply filters to improve query performance

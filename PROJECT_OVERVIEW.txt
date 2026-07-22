@@ -1,0 +1,750 @@
+================================================================================
+                    SALES PATTERN MINING - FULL PROJECT OVERVIEW
+================================================================================
+
+Project Name: Sales Data Warehouse Analytics Platform
+Version: 1.0
+Date: 2024
+Platform: Python-based Analytics & Visualization System
+
+================================================================================
+                            PROJECT DESCRIPTION
+================================================================================
+
+A comprehensive analytics platform for sales data mining, forecasting, and 
+visualization. This project implements a complete data analytics pipeline 
+from raw data processing through advanced analytics to business intelligence 
+integration.
+
+WHAT THIS PROJECT DOES:
+
+This platform transforms raw retail transaction data into actionable business 
+insights through a multi-layered analytics approach:
+
+1. DATA WAREHOUSING
+   - Converts raw transaction data into a star schema data warehouse
+   - Organizes data into fact table (transactions) and dimension tables 
+     (customers, products, stores, dates, promotions)
+   - Enables efficient analytical queries and reporting
+   - Handles large-scale datasets (millions of transactions)
+
+2. EXPLORATORY DATA ANALYSIS
+   - Performs comprehensive statistical analysis on warehouse data
+   - Identifies sales patterns, trends, and anomalies
+   - Analyzes performance across multiple dimensions (products, stores, 
+     customers, time periods)
+   - Generates data quality reports and visualizations
+   - Provides insights into business performance metrics
+
+3. KNOWLEDGE DISCOVERY
+   - Implements complete KDD (Knowledge Discovery in Databases) process
+   - Discovers hidden patterns and relationships in sales data
+   - Applies data mining techniques (clustering, correlation analysis)
+   - Generates automated insights and recommendations
+   - Creates comprehensive mining reports
+
+4. SALES FORECASTING
+   - Predicts future sales trends using time series models
+   - Applies ARIMA, SARIMA, and ARMA forecasting techniques
+   - Provides forecast confidence intervals
+   - Helps with inventory planning and business planning
+   - Compares multiple forecasting models for accuracy
+
+5. MARKET BASKET ANALYSIS
+   - Discovers which products are frequently bought together
+   - Generates association rules for product recommendations
+   - Calculates support, confidence, and lift metrics
+   - Helps optimize product placement and cross-selling strategies
+   - Uses Apriori and FP-Growth algorithms
+
+6. DATA VISUALIZATION
+   - Creates static and interactive visualizations
+   - Generates dashboards for business intelligence
+   - Provides multiple chart types for different analysis needs
+   - Enables data export for external reporting tools
+   - Supports 3D visualizations for complex data relationships
+
+7. BUSINESS INTELLIGENCE INTEGRATION
+   - Exports data in formats compatible with Power BI
+   - Embeds Power BI reports directly in the application
+   - Provides DAX measures and connection guides
+   - Enables seamless integration with enterprise BI tools
+
+8. INTERACTIVE WEB APPLICATION
+   - Provides user-friendly web interface built with Streamlit
+   - Allows non-technical users to run complex analyses
+   - Real-time execution of analytics modules
+   - Interactive parameter controls for customization
+   - Session-based data management
+
+Key Focus Areas:
+- Data Warehouse Design (Star Schema)
+- Knowledge Discovery in Databases (KDD Process)
+- Time Series Forecasting
+- Association Rules Mining
+- Advanced Data Visualization
+- Power BI Report Embedding
+- Interactive Web Application
+
+================================================================================
+                         PROJECT ARCHITECTURE
+================================================================================
+
+1. DATA LAYER
+   Location: data/
+   
+   Raw Data:
+   - data/raw/Retail_Transactions_Dataset.csv
+   
+   Data Warehouse (Star Schema):
+   - data/warehouse/fact_sales.csv (Fact Table)
+     * Contains: Transaction_ID, date_id, customer_id, product_id, store_id, 
+       promotion_id, Total_Items, Total_Cost, Discount_Applied, Payment_Method, sales_id
+   - data/warehouse/dim_customer.csv (Dimension Table)
+     * Contains: customer_id, Customer_Name, Customer_Category
+   - data/warehouse/dim_date.csv (Dimension Table)
+     * Contains: date_id, Date, year, month, day, weekday, season
+   - data/warehouse/dim_product.csv (Dimension Table)
+     * Contains: product_key, Product
+     * Note: Uses product_key as primary key (linked to product_id in fact table)
+   - data/warehouse/dim_store.csv (Dimension Table)
+     * Contains: store_id, City, Store_Type
+   - data/warehouse/dim_promotion.csv (Dimension Table)
+     * Contains: promotion_id, Promotion
+
+2. CORE MODULES
+   
+   kdd_process.py
+   - Complete 5-step KDD pipeline implementation
+   - Step 1: Selection (data filtering, sampling)
+   - Step 2: Preprocessing (missing values, outliers, cleaning)
+   - Step 3: Transformation (feature engineering, encoding, normalization)
+   - Step 4: Data Mining (patterns, clustering, correlation)
+   - Step 5: Interpretation (insights generation, reporting)
+   - Output: kdd_results/
+   
+   time_series_forecasting.py
+   - ARIMA (AutoRegressive Integrated Moving Average) model
+   - SARIMA (Seasonal ARIMA) model
+   - ARMA (AutoRegressive Moving Average) model
+   - Stationarity checking (ADF test)
+   - Automatic parameter optimization
+   - Forecast generation with confidence intervals
+   - Model comparison and evaluation
+   - Output: forecast_output/
+   
+   association_rules_mining.py
+   - Apriori algorithm for frequent itemset mining
+   - FP-Growth algorithm alternative
+   - Association rules generation
+   - Support, confidence, lift metrics calculation
+   - Market basket analysis
+   - Insights extraction
+   - Output: association_rules_output/
+   
+   visualizations.py
+   - Matplotlib: Static charts and trends
+   - Seaborn: Heatmaps and statistical plots
+   - Plotly: Interactive dashboards, 3D scatter plots
+   - Multiple visualization types:
+     * Sales trends over time
+     * Category/store/city analysis
+     * Correlation heatmaps
+     * Interactive dashboards
+   - Output: visualizations/
+   
+   eda_warehouse.py
+   - Exploratory Data Analysis on warehouse data
+   - Loads all warehouse tables (fact + 5 dimensions)
+   - Creates merged dataset for comprehensive analysis
+   - Statistical summaries and data quality checks
+   - Dimension analysis (customer, date, product, store, promotion)
+   - Sales analysis by category, store type, city, season, month, year
+   - Correlation analysis and heatmaps
+   - Generates multiple visualization charts
+   - Handles product_key/product_id column name differences automatically
+   - Output: eda_output/
+
+3. APPLICATION LAYER
+   
+   app.py (Streamlit Web Application)
+   - Multi-page interactive GUI
+   - 7 main pages:
+     1. Home - Project overview and navigation
+     2. EDA & Analysis - Data exploration and warehouse analysis
+     3. KDD Process - Run complete KDD pipeline
+     4. Time Series Forecasting - Generate sales forecasts
+     5. Association Rules - Discover frequent patterns
+     6. Visualizations - Generate charts and dashboards
+     7. Power BI Report - View embedded Power BI report
+   
+   Features:
+   - Interactive controls and parameters for all modules
+   - Real-time analysis execution with progress indicators
+   - Results visualization with multiple chart types
+   - Data export options (CSV, Excel)
+   - Objective-focused visualizations (3 key business objectives)
+   - Memory-efficient data loading and processing
+   - Session state management for data persistence
+   - Error handling with user-friendly messages
+   - Dynamic column name detection and handling
+   - Support for large datasets (16+ million rows)
+
+4. CONFIGURATION & UTILITIES
+   
+   main.py
+   - Command-line interface alternative
+   - Module execution from terminal
+   
+   requirements.txt
+   - All Python dependencies
+   - Version specifications
+
+================================================================================
+                         KEY OBJECTIVES & FEATURES
+================================================================================
+
+✅ OBJECTIVE 1: Large-scale Sales Data Warehouse
+   - Star schema design
+   - Fact table with transaction-level data
+   - 5 dimension tables (Customer, Date, Product, Store, Promotion)
+   - Optimized for analytical queries
+   - Memory-efficient processing
+
+✅ OBJECTIVE 2: KDD Process Implementation
+   - Complete 5-step pipeline
+   - Automated data cleaning and preprocessing
+   - Feature engineering capabilities
+   - Multiple mining algorithms
+   - Automated insights generation
+   - Comprehensive reporting
+
+✅ OBJECTIVE 3: Time Series Forecasting
+   - ARIMA model with auto-parameter optimization
+   - SARIMA for seasonal patterns
+   - ARMA for stationary series
+   - Forecast confidence intervals
+   - Model performance metrics
+   - Visual forecast displays
+
+✅ OBJECTIVE 4: Association Rules Mining
+   - Market basket analysis
+   - Frequent pattern discovery
+   - Association rules with confidence/support/lift
+   - Multiple algorithm support (Apriori, FP-Growth)
+   - Business insights extraction
+
+✅ OBJECTIVE 5: Advanced Visualizations
+   - Static visualizations (Matplotlib, Seaborn)
+   - Interactive dashboards (Plotly)
+   - 3D visualizations
+   - Multiple chart types
+   - Export capabilities
+
+✅ OBJECTIVE 6: Power BI Report Embedding
+   - Embedded Power BI report display
+   - Simple iframe integration
+
+✅ OBJECTIVE 7: Interactive GUI
+   - Streamlit-based web application
+   - User-friendly interface
+   - Real-time processing
+   - Results visualization
+   - Configuration management
+
+================================================================================
+                         TECHNICAL SPECIFICATIONS
+================================================================================
+
+PROGRAMMING LANGUAGE: Python 3.x
+
+MAIN FRAMEWORKS & LIBRARIES:
+- Streamlit: Web application framework
+- Pandas: Data manipulation and analysis
+- NumPy: Numerical computing
+- Matplotlib: Static plotting
+- Seaborn: Statistical visualization
+- Plotly: Interactive visualization
+- Scikit-learn: Machine learning utilities
+- MLxtend: Association rules mining
+- Statsmodels: Time series analysis
+
+DEPENDENCIES (requirements.txt):
+- streamlit>=1.28.0
+- pandas>=2.0.0
+- numpy>=1.24.0
+- matplotlib>=3.7.0
+- seaborn>=0.12.0
+- plotly>=5.17.0
+- scikit-learn>=1.3.0
+- mlxtend>=0.22.0
+- statsmodels>=0.14.0
+- openpyxl>=3.1.0
+
+OPERATING SYSTEM: Cross-platform (Windows, Linux, macOS)
+
+DATABASE: CSV-based data warehouse (no database server required)
+
+================================================================================
+                         DATA FLOW ARCHITECTURE
+================================================================================
+
+1. DATA INGESTION
+   Raw CSV → Data Warehouse Creation → Star Schema Structure
+
+2. DATA PROCESSING
+   Warehouse Data → KDD Process → Transformed Data → Mining Results
+
+3. ANALYTICS
+   Transformed Data → Forecasting/Association Rules → Insights
+
+4. VISUALIZATION
+   Results → Visualization Generation → Charts/Dashboards
+
+5. BUSINESS INTELLIGENCE
+   Power BI Report → Embedded Display
+
+================================================================================
+                         FILE STRUCTURE
+================================================================================
+
+Sales_Pattern_Mining-main/
+│
+├── Core Application Files
+│   ├── app.py                          # Main Streamlit application
+│   ├── main.py                         # CLI entry point
+│   ├── kdd_process.py                  # KDD pipeline implementation
+│   ├── time_series_forecasting.py      # Forecasting models
+│   ├── association_rules_mining.py     # Association rules
+│   ├── visualizations.py               # Visualization generation
+│   └── eda_warehouse.py                # Exploratory data analysis
+│
+├── Data Directory
+│   ├── data/
+│   │   ├── raw/
+│   │   │   └── Retail_Transactions_Dataset.csv
+│   │   └── warehouse/
+│   │       ├── fact_sales.csv
+│   │       ├── dim_customer.csv
+│   │       ├── dim_date.csv
+│   │       ├── dim_product.csv
+│   │       ├── dim_store.csv
+│   │       └── dim_promotion.csv
+│
+├── Output Directories
+│   ├── kdd_results/                    # KDD process outputs
+│   ├── forecast_output/                # Forecasting results
+│   ├── association_rules_output/       # Association rules
+│   ├── visualizations/                 # Generated charts
+│   └── eda_output/                     # EDA results
+│
+├── Configuration Files
+│   ├── requirements.txt                # Python dependencies
+│   ├── credentials.txt                 # Power BI credentials (if needed)
+│   └── .gitignore                      # Git ignore rules
+│
+├── Power BI Data Export
+│   └── powerbi_data/                   # Power BI data export files
+│       ├── fact_sales_powerbi.csv
+│       ├── powerbi_data.xlsx
+│       ├── powerbi_connection_guide.txt
+│       └── powerbi_dax_measures.txt
+│
+└── Documentation
+    ├── README.md                       # Main documentation
+    ├── PROJECT_SUMMARY.md              # Project summary
+    ├── QUICKSTART.md                   # Quick start guide
+    └── HOW_TO_VIEW.md                  # Viewing instructions
+
+================================================================================
+                         USAGE INSTRUCTIONS
+================================================================================
+
+PRIMARY METHOD: Streamlit Web Application
+
+1. Installation:
+   pip install -r requirements.txt
+
+2. Launch Application:
+   streamlit run app.py
+
+3. Access Interface:
+   Open browser to http://localhost:8501
+
+4. Navigation:
+   Use sidebar to navigate between pages:
+   - Home: Project overview
+   - EDA & Analysis: Explore warehouse data
+   - KDD Process: Run data mining pipeline
+   - Time Series Forecasting: Generate predictions
+   - Association Rules: Discover patterns
+   - Visualizations: Create charts
+   - Power BI Report: View embedded report
+
+ALTERNATIVE METHOD: Command Line
+
+python main.py [module_name]
+python kdd_process.py
+python time_series_forecasting.py
+python association_rules_mining.py
+python visualizations.py
+
+================================================================================
+                         POWER BI INTEGRATION
+================================================================================
+
+POWER BI REPORT EMBEDDING:
+- Simple iframe-based Power BI report embedding
+- Direct Power BI report URL integration
+- Embedded Power BI report display in Streamlit app
+- Full-screen viewing capability
+- No authentication required (uses public embed URL)
+
+POWER BI REPORT PAGE FEATURES:
+- Display embedded Power BI report via iframe
+- Interactive report viewing with all Power BI features
+- Responsive layout with scrollable content
+- Full-screen viewing option
+
+================================================================================
+                         OBJECTIVE-FOCUSED ANALYSIS
+================================================================================
+
+The application includes three key business objectives implemented in the Visualizations
+page (under KDD Results visualizations section). These objectives use warehouse data 
+directly for memory efficiency and accuracy.
+
+OBJECTIVE 1: Product Category Sales Distribution
+- Analyze sales by product categories
+- Identify high-performing categories
+- Compare total cost and item volume
+- Top 15 categories visualization
+- Performance matrix (scatter plot)
+- Uses: fact_sales + dim_product (memory-efficient aggregation)
+
+OBJECTIVE 2: Month-wise Sales Trends and Seasonality
+- Monthly sales trend analysis
+- Transaction volume tracking
+- Seasonal pattern identification
+- Combined dual-axis visualizations
+- Seasonality distribution charts
+- Uses: fact_sales + dim_date (memory-efficient aggregation)
+
+OBJECTIVE 3: Store-Level Sales Performance
+- Store performance comparison
+- Top 20 stores analysis
+- Sales distribution histograms
+- Top 10 vs Bottom 10 comparison
+- Performance metrics summary
+- Uses: fact_sales + dim_store (memory-efficient aggregation)
+
+MEMORY OPTIMIZATION STRATEGY:
+All objectives use an optimized approach to handle large datasets:
+1. Load fact table and dimension tables separately
+2. Aggregate fact table by ID first (reduces memory usage significantly)
+3. Merge aggregated results with dimension tables (smaller datasets)
+4. This prevents memory allocation errors with large datasets (millions of rows)
+
+DATA SOURCE: Warehouse folder (data/warehouse/) - NOT KDD transformed data
+This ensures consistency and accuracy using the source data warehouse.
+
+================================================================================
+                         OUTPUT FILES & RESULTS
+================================================================================
+
+KDD PROCESS OUTPUTS (kdd_results/):
+- summary_statistics.csv
+- category_patterns.csv
+- monthly_patterns.csv
+- store_patterns.csv
+- correlation_matrix.csv
+- insights.txt
+- summary_report.json
+
+FORECASTING OUTPUTS (forecast_output/):
+- ARIMA forecasts
+- SARIMA forecasts
+- ARMA forecasts
+- Model comparison metrics
+- Forecast plots and charts
+
+ASSOCIATION RULES OUTPUTS (association_rules_output/):
+- frequent_itemsets.csv
+- association_rules.csv
+- insights.json
+
+VISUALIZATIONS (visualizations/):
+- Matplotlib charts
+- Seaborn plots
+- Plotly interactive dashboards
+- 3D scatter plots
+
+EDA OUTPUTS (eda_output/):
+- Statistical summaries
+- Data quality reports
+- Dimension analysis results
+
+================================================================================
+                         KEY CAPABILITIES & ALGORITHMS
+================================================================================
+
+DATA MINING ALGORITHMS:
+- K-Means Clustering
+- Correlation Analysis
+- Pattern Discovery
+- Statistical Summarization
+
+TIME SERIES ALGORITHMS:
+- ARIMA (AutoRegressive Integrated Moving Average)
+- SARIMA (Seasonal ARIMA)
+- ARMA (AutoRegressive Moving Average)
+- Stationarity Testing (ADF Test)
+- Parameter Auto-optimization
+
+ASSOCIATION RULES ALGORITHMS:
+- Apriori Algorithm
+- FP-Growth Algorithm
+- Frequent Itemset Mining
+- Rule Generation with Metrics
+
+VISUALIZATION TECHNIQUES:
+- Static Charts (Matplotlib, Seaborn)
+- Interactive Dashboards (Plotly)
+- 3D Visualizations
+- Heatmaps
+- Time Series Plots
+- Distribution Charts
+- Scatter Plots
+- Bar Charts
+- Line Charts
+
+================================================================================
+                         PERFORMANCE OPTIMIZATIONS
+================================================================================
+
+MEMORY EFFICIENCY:
+- Separate fact and dimension table loading
+- On-demand merging for specific analyses
+- Aggregation before merging to reduce memory
+- Efficient column name handling after DataFrame operations
+
+DATA PROCESSING:
+- Sampling options for large datasets
+- Batch processing for Power BI Push API
+- Chunked data processing
+- Caching mechanisms
+
+ERROR HANDLING:
+- Comprehensive try-except blocks
+- User-friendly error messages
+- Fallback mechanisms
+- Validation checks
+
+================================================================================
+                         SECURITY & BEST PRACTICES
+================================================================================
+
+SECURITY MEASURES:
+- Secure code structure
+- Error handling and validation
+
+BEST PRACTICES:
+- Modular code structure
+- Comprehensive error handling
+- Documentation and comments
+- Configuration management
+- Output organization
+
+================================================================================
+                         TECHNICAL HIGHLIGHTS
+================================================================================
+
+1. MODULAR ARCHITECTURE
+   Each component is independent and reusable
+
+2. MEMORY-EFFICIENT PROCESSING
+   Handles large datasets without memory errors
+
+3. INTERACTIVE GUI
+   User-friendly Streamlit interface
+
+4. COMPREHENSIVE ANALYTICS
+   Multiple analysis techniques in one platform
+
+5. POWER BI INTEGRATION
+   Simple iframe-based Power BI report embedding
+   Direct Power BI report URL integration
+
+6. PRODUCTION-READY
+   Error handling, logging, and documentation
+
+7. EXTENSIBLE DESIGN
+   Easy to add new features and algorithms
+
+================================================================================
+                         ACADEMIC & RESEARCH APPLICATIONS
+================================================================================
+
+This project demonstrates implementation of:
+
+- Data Warehouse Design (Star Schema)
+- Knowledge Discovery in Databases (Complete 5-step KDD Process)
+- Time Series Forecasting (ARIMA, SARIMA, ARMA models)
+- Association Rule Mining (Apriori, FP-Growth algorithms)
+- Power BI Report Embedding
+- Interactive Data Visualization
+- Full-Stack Analytics Application Development
+- Data Mining Techniques
+- Statistical Analysis
+- Machine Learning Applications
+
+================================================================================
+                         TROUBLESHOOTING GUIDE
+================================================================================
+
+COMMON ISSUES & SOLUTIONS:
+
+1. Import Errors
+   Solution: pip install -r requirements.txt
+
+2. Memory Errors
+   Solution: Use sampling parameters or process in chunks
+
+3. Missing Data Files
+   Solution: Ensure data/warehouse/ contains all required CSV files
+
+4. Large Dataset Performance
+   Solution: Use sample_size parameter in KDD Process
+
+5. Column Name Errors
+   Solution: Code automatically handles column name variations
+   - Supports product_key/product_id differences
+   - Handles Product_, City_, month column variations
+   - Automatic detection after DataFrame operations
+   - Robust merge operations with flexible column matching
+
+================================================================================
+                         FUTURE ENHANCEMENTS
+================================================================================
+
+Potential extensions:
+- Additional forecasting models (Prophet, LSTM)
+- More clustering algorithms
+- Real-time data streaming
+- Database integration (SQL Server, PostgreSQL)
+- Additional visualization types
+- Machine learning model training
+- Automated reporting
+- Scheduled data refreshes
+- Multi-tenant support
+
+================================================================================
+                         PROJECT STATUS
+================================================================================
+
+Status: ✅ PRODUCTION READY
+
+All Objectives: ✅ COMPLETED
+- Data Warehouse: ✅ Complete
+- KDD Process: ✅ Complete
+- Time Series Forecasting: ✅ Complete
+- Association Rules: ✅ Complete
+- Visualizations: ✅ Complete
+- Power BI Report Embedding: ✅ Complete
+- Interactive GUI: ✅ Complete
+
+Testing: ✅ Functional
+Documentation: ✅ Comprehensive
+Error Handling: ✅ Implemented
+Performance: ✅ Optimized
+
+================================================================================
+                         CONTACT & SUPPORT
+================================================================================
+
+For issues or questions:
+- Check documentation files (README.md, QUICKSTART.md)
+- Review error messages in application
+- Verify configuration files
+- Check data file integrity
+
+================================================================================
+                         PROJECT METADATA
+================================================================================
+
+Created: 2024
+Last Updated: 2024
+Python Version: 3.x
+Streamlit Version: 1.28+
+Dependencies: See requirements.txt
+License: Educational/Analytical Use
+
+================================================================================
+                         END OF PROJECT OVERVIEW
+================================================================================
+
+This document provides a comprehensive overview of the Sales Pattern Mining
+project. For detailed usage instructions, refer to README.md and QUICKSTART.md.
+
+The Power BI report is embedded using a direct iframe URL integration.
+
+================================================================================
+                         WHAT THIS PROJECT DOES
+================================================================================
+
+This Sales Pattern Mining platform provides a complete end-to-end analytics solution:
+
+1. DATA WAREHOUSE MANAGEMENT
+   - Maintains a star schema data warehouse with fact and dimension tables
+   - Handles large-scale transaction data (millions of rows)
+   - Efficient data loading and merging operations
+   - Automatic column name detection and matching
+
+2. EXPLORATORY DATA ANALYSIS (EDA)
+   - Loads and merges all warehouse tables
+   - Provides statistical summaries and data quality reports
+   - Analyzes sales patterns across multiple dimensions
+   - Generates comprehensive visualizations
+   - Identifies trends, seasonality, and patterns
+
+3. KNOWLEDGE DISCOVERY IN DATABASES (KDD)
+   - Complete 5-step KDD pipeline implementation
+   - Data selection, preprocessing, transformation, mining, and interpretation
+   - Multiple mining techniques (clustering, correlation, pattern discovery)
+   - Automated insights generation
+   - Comprehensive reporting
+
+4. TIME SERIES FORECASTING
+   - ARIMA, SARIMA, and ARMA model implementations
+   - Automatic parameter optimization
+   - Stationarity testing and validation
+   - Forecast generation with confidence intervals
+   - Model comparison and evaluation metrics
+
+5. ASSOCIATION RULES MINING
+   - Market basket analysis
+   - Frequent itemset discovery using Apriori and FP-Growth algorithms
+   - Association rules with support, confidence, and lift metrics
+   - Business insights extraction for product recommendations
+
+6. ADVANCED VISUALIZATIONS
+   - Static charts (Matplotlib, Seaborn)
+   - Interactive dashboards (Plotly)
+   - 3D visualizations
+   - Multiple chart types (bar, line, scatter, heatmap, etc.)
+   - Export capabilities for reports
+
+7. INTERACTIVE WEB APPLICATION
+   - Streamlit-based GUI with 7 main pages
+   - Real-time analysis execution
+   - Interactive controls and parameters
+   - Results visualization and export
+   - Session state management
+
+8. POWER BI INTEGRATION
+   - Data export for Power BI dashboards
+   - Embedded Power BI report viewing
+   - DAX measures and connection guides
+
+================================================================================
+

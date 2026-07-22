@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+env/
+venv/
+ENV/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Environment variables and secrets
+.env
+.env.local
+*.key
+*.pem
+credentials.py
+credentials.txt
+config_powerbi.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and testing
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Data files
+*.csv
+*.xlsx
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+
+# Jupyter
+.ipynb_checkpoints/
